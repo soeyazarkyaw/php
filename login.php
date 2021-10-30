@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
+    <a style="margin-right:10px ;" href="login.php">Login</a>
+    <a style="margin-right:10px ;" href="logout.php">logout</a>
+    <a href="register.php">register</a><br><br><br><br>
    <h3>Login Form</h3> 
    <form method="POST">
         email <input name="userEmail" type="text"><br>
@@ -15,13 +18,12 @@
    </form>
 
    <?php
-   $email = 'admin@gmail.com';
-   $password = password_hash('admin123',PASSWORD_BCRYPT);
+        session_start();
 
         if(isset($_POST['logBtn'])){
             $userEmail = $_POST['userEmail'];
             $userPw = $_POST['userPw'];
-            if($email == $userEmail and password_verify( $userPw,$password) ){
+            if(  $userEmail == $_SESSION['email'] and password_verify( $userPw,$_SESSION['password']) ){
                 echo "login sucess";
             }else{
                 echo "Try again";
